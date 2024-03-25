@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results Money</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex flex-col items-center  h-screen">
+<div class="container mx-auto my-10 px-4 py-6 bg-white rounded-md shadow-md text-center">
+    <h1 class="text-2xl font-semibold mb-4">Results</h1>
+    <p class="mb-2">Currency: {{currency}}</p>
+    <p class="mb-2">Starting date: {{date_from}}</p>
+    <p class="mb-2">Ending date: {{date_to}}</p>
+    <p class="mb-2">Money: {{money}}</p>
+    <p class="mb-2">Global minimal value: {{global_min}} PLN</p>
+    <p class="mb-2">Global maximal value: {{global_max}} PLN</p>
+    <p class="mb-2">Global mean: {{glob_mid}} PLN</p>
+    <p class="mb-2">NBP mean: {{nbp_mid}} PLN</p>
+    <p class="mb-2">Frankfurter mean: {{frankfurter_mid}} PLN</p>
+</div>
+<a href="/home" class="text-blue-500 text-sm mt-4 underline">Check another currency</a>
+</body>
+</html>

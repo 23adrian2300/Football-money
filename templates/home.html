@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<h1 class="text-center border rounded-md p-2 w-full mb-3 text-lg font-semibold">Football-money</h1>
+<a href="/" class="text-blue-500 text-sm mt-4 underline">Back to homepage</a>
+    <div class="flex justify-center mt-10">
+        <div class="form-container bg-white p-6 rounded-md shadow-md">
+            <form action="myApp/results/player/" method="post">
+                <h3 class="text-lg font-semibold mb-3">Input club name:</h3>
+                <input type="text" name="club_name" placeholder="Name" class="border rounded-md p-2 w-full mb-3">
+                <h3 class="text-lg font-semibold mb-3">Input year:</h3>
+                <input type="text" name="year" placeholder="Year" class="border rounded-md p-2 w-full mb-3">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit</button>
+            </form>
+        </div>
+        <div class="form-container bg-white p-6 rounded-md shadow-md ml-8">
+            <form action="myApp/results/money/" method="post">
+                <h3 class="text-lg font-semibold mb-3">Input how much money you want:</h3>
+                <input type="text" name="money" placeholder="Money" class="border rounded-md p-2 w-full mb-3">
+                <h3 class="text-lg font-semibold mb-3">Choose date from:</h3>
+                <input type="date" name="date_from" id="date_from" min="2002-01-02" class="border rounded-md p-2 w-full mb-3">
+                <h3 class="text-lg font-semibold mb-3">Choose date to:</h3>
+                <input type="date" name="date_to" id="date_to" min="2002-01-02" class="border rounded-md p-2 w-full mb-3">
+                <h3 class="text-lg font-semibold mb-3">Select currency:</h3>
+                <select id="select" name="currency" class="border rounded-md p-2 w-full mb-3">
+                    <option value="USD">USD</option>
+                    <option value="GBP">GBP</option>
+                    <option value="EUR">EUR</option>
+                </select>
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function checkDate() {
+            var date_from = document.getElementById("date_from").value;
+            var date_to = document.getElementById("date_to").value;
+
+            if (date_to < date_from) {
+                alert("Wrong date");
+                document.getElementById("date_to").value = date_from;
+            }
+        }
+    </script>
+</body>
+</html>
