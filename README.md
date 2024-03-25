@@ -31,9 +31,6 @@ Zrobiłem tak, gdyż miałem problem z api pobierającym piłkarza, gdyż przez 
 W pliku .env znajdują się klucze API_KEY do tych serwisów. Oczywiście, aby aplikacja działała poprawnie, należy dodać tam swoje klucze.
 Tak samo należy podać api_key do samego api w main.py. Różne klucze znajdują się w pliku api_key.txt. Należy wykorzystać jeden z nich aby móc korzystać z aplikacji.
 
-Jeśli trzeba można użyć:
-
-`pip install -r requiements.txt`
 
 Aby uruchomić:
 

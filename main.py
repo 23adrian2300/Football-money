@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse
 
+from utils import *
 # Create FastAPI instance
 app = FastAPI()
 
@@ -21,15 +22,6 @@ load_dotenv()
 API_KEY_CURR = os.getenv("API_KEY_CURRENCY")  # API to CurrencyApi
 API_KEY_EXCHANGE = os.getenv("API_KEY_EXCHANGE_GENERATE")  # API to ExchangeRateApi
 API_KEY = os.getenv("API_KEY")  # API to this service
-
-
-# function to verify if the api key is valid
-def verify_api_key(api_key: str):
-    file = open('api_keys.txt', 'r')
-    for line in file:
-        if api_key in line:
-            return True
-    return False
 
 
 # function to handle RequestValidationError
@@ -74,25 +66,6 @@ async def homepage(request: Request):
 
     return templates.TemplateResponse("home.html", {"request": request})  # render home.html
 
-# function to convert string to int and remove unnecessary characters
-def string_to_int(string):
-    return int(string.replace('€', '').replace('m', '0000').replace('k', '0').replace('.', '').replace(' ', ''))
-
-
-# function to get the most valuable player by club id
-def get_most_valuable_player_by_club_id(parsed):
-    try:
-        players = parsed['players']
-        players_with_market_value = [player for player in players if player.get('marketValue')]
-        players_with_market_value = sorted(players_with_market_value,
-                                           key=lambda x: string_to_int(x.get('marketValue', '0')), reverse=True)
-        most_valuable_player = players_with_market_value[0]
-        value = most_valuable_player.get('marketValue')
-
-        return most_valuable_player, value
-    except Exception as e:
-        return e
-
 
 # async function to get the most valuable player by club name and year
 @app.post("/myApp/results/player", response_class=HTMLResponse)
@@ -136,8 +109,6 @@ async def results(request: Request, club_name: str = Form(...), year: str = Form
     except Exception:
         raise HTTPException(status_code=404, detail="Failed to get player info beacuse of api error or parsing error")
 
-    # function to get the average value of 1 EUR in PLN from two different APIs
-
 
 def currency_converter():
     try:
@@ -156,23 +127,6 @@ def currency_converter():
         raise HTTPException(status_code=404, detail="Exchange currency api not responded")
 
     return (value1 + value2) / 2
-
-
-# function to parse info about player
-def parse_info_about_player(parsed, value):
-    try:
-        name = parsed['name']
-        age = parsed['age']
-        position = parsed['position']
-        dateofbirth = parsed['dateOfBirth']
-        nationality = parsed["nationality"][0]
-        height = parsed['height']
-        foot = parsed['foot']
-        valueofplayer = value
-
-        return name, age, position, dateofbirth, nationality, height, foot, valueofplayer
-    except Exception:
-        raise HTTPException(status_code=404, detail="Failed to parse info about player")
 
 
 # async function to convert money to PLN
