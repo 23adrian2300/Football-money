@@ -1,0 +1,7 @@
+Jeśli trzeba można użyć:
+pip install -r requiements.txt
+
+Aby uruchomić:
+uvicorn main:app --reload --port 8002
+
+Numer portu można zmieniać na inny
